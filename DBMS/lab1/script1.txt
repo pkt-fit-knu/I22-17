@@ -1,0 +1,41 @@
+\c NewBase
+CREATE TABLE adresses(
+	id_adress serial primary key,
+	city varchar(20),
+	streets varchar(20),
+	building int,
+	unique(city,streets,building)
+);
+CREATE TABLE donuts(
+	id_donut serial primary key,
+	name varchar(20),
+	cost integer
+);
+CREATE TABLE stores(
+	id_store serial primary key,
+	name varchar(20),
+	id_adress int references adresses(id_adress)
+);
+CREATE TABLE donuts_stores(
+	id_donut int references donuts(id_donut),
+	id_store int references stores(id_store),
+	primary key(id_donut,id_store)
+);
+CREATE TABLE persons(
+	id_person serial primary key,
+	first_name varchar(20),
+	last_name varchar(20),
+	id_adress int references adresses(id_adress)
+);
+CREATE TABLE employees(
+	id_store int references stores(id_store),
+	id_person int references persons(id_person) primary key,
+	salary int,
+	position varchar(20),
+	years_worked int
+);
+CREATE TABLE customers(
+	discount_card int primary key,
+	id_person int references persons(id_person),
+	discount_size int
+);

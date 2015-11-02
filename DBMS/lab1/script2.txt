@@ -1,0 +1,8 @@
+insert into adresses values (1, 'Kiev', 'Main', 54), (2, 'Kiev', 'Lenina', 32), 
+(3, 'Kharkov', 'Main', 1), (4, 'Kiev', 'Gogolya', 22), (5, 'Kiev', 'Kirova', 16), (6, 'Kharkov', 'Shevchenka', 10);
+insert into donuts values (1, 'Chocolate', 3), (2, 'Lemon', 5), (3, 'Strawberry', 10), (4, 'Orange', 6), (5, 'Apple', 7);
+insert into stores values (1, 'Dream', 1), (2, 'Light', 2), (3,'Sky', 5), (4, 'Something', 6);
+insert into donuts_stores values (1, 1), (2, 1), (2, 2), (3, 2),  (4, 3), (3, 3), (5, 3), (4, 4),(5,4),(1,4);
+insert into persons values (1, 'Suprunov', 'Vladyslav', 3), (2, 'Lenin', 'Vova', 4), (3, 'Stecuk', 'Roma', 3);
+insert into customers values (1, 1, 10);
+insert into employees values (1, 2, 1000, 'vendor', 2), (2, 3, 1200, 'director', 1);
