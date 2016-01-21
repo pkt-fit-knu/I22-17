@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SVG Tree</title>
+	<script>
+		function f(){
+			function element(svg_picture){
+				this.generate = function() 
+				{
+					var res = '';
+					var color1 = '#'; var color2 = '#';
+					for (var i=0;i<6;i++){ color1+=parseInt(Math.random()*10); color2+=parseInt(Math.random()*10); }
+					var x = parseInt(Math.random()*700)+100, y = parseInt(Math.random()*500)+100;
+					var len = parseInt(Math.random()*50)+10;
+					var str;
+					for (var i=0;i<4;i++) {
+						str="<path d='M "+x+" "+y+" l "+(-2*len)+" 0 l "+(2*len)+" "+(-len)+" l "+2*len+" "+len+" l "+(-2*len)+" 0' stroke='black' fill='"+color1+"'/>";
+						res += str;			
+						y+=len;
+					}
+					y-=len;
+					str="<path d='M "+x+" "+y+" l -10 0 l 0 20 l 20 0 l 0 -20 l -10 0' stroke='black' fill='"+color2+"'/>";
+					res += str;
+					return res;
+				}
+				this.display = function()
+				{
+					svg_picture.innerHTML += this.generate();
+				}
+			}
+			
+			setInterval(function()
+			{
+				obj = new element(document.getElementById("pic"));
+				obj.display();
+			},1000);
+			
+		}
+	</script>
+</head>
+<body onload="f()">
+	<svg id="pic" width="1000" height="700">
+	</svg>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Canvas tree</title>
+		<script>
+			function s(){
+				this.xcen = Math.random()*800+100;
+				this.ycen = Math.random()*500+100;
+				this.r1 = Math.random()*30+5;
+				this.r2 = Math.random()*(this.r1-4)+1;
+				this.d = Math.random()*70+this.r1;
+				this.run = function()
+				{
+					
+					var obj = document.getElementById("pic");
+					var c = obj.getContext('2d');
+					c.strokeStyle = 'rgb(255,0,0)';
+					c.fillStyle = 'brown';
+					c.beginPath();
+					c.fillRect(this.xcen-this.r2, this.ycen, this.r2*2, this.d);
+					c.closePath();
+					c.stroke();
+					c.fill();
+					
+					c.strokeStyle = 'black';
+					c.fillStyle = 'green';
+					c.beginPath();
+					c.arc(this.xcen,this.ycen,this.r1,0,Math.PI*2,1);
+					c.closePath();
+					c.stroke();
+					c.fill();
+				}
+			}
+			function f(){
+				setInterval(function(){
+					var elem = new s();
+					elem.run();
+				},200);
+			}
+		</script>
+	</head>
+	<body onload="f()">
+		<canvas id="pic" width="1000" height="700">
+		</canvas>
+	</body>
+</html>

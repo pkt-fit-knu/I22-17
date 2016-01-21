@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Animation 3</title>
+		<style>
+			body {
+				background: black;
+			}
+			div{
+				
+				position: absolute;
+				width : 2px;
+				height: 2px;
+				background-color: white;
+				border : 1px solid gray;
+				border-radius: 100%;
+			}
+			p {
+				position: absolute;
+				color: white;
+				font-family: cursive;
+				top: 150px;
+				left:200px;
+				font-size:30px;
+			}
+		</style>
+		<script>
+			function AnimatingElement(element)
+			{
+					
+				this.run = function(starttime)
+				{
+					
+					var R = 15, x0 = 400, y0 = 200, da1 = 0.1, da2 = 0.05;
+					var alpha = 0.5*Math.PI, tx = 0, ty = 0;
+					var time = starttime; var flag = 1;
+					element.style.display = 'none';
+					var Interv = setInterval(function(){
+						if (flag == 0){
+							if ((alpha >= Math.PI && alpha < 2*Math.PI)||(alpha>=3*Math.PI && alpha<4*Math.PI)) 
+								alpha+=0.05;
+							else alpha+=0.1;
+						}
+						else time++;
+						if (alpha >= 4.5*Math.PI)
+						{ 
+							flag = 1; 
+							element.style.display = 'none'; 
+							alpha = 0.5*Math.PI; 
+						}
+						if (time >= 100)
+						{ 
+							time = 0; 
+							flag = 0; 
+							element.style.display = 'block';
+						}
+						tx = x0 + Math.cos(alpha)*R;
+						ty = y0 + Math.sin(alpha)*R;
+						element.style.left = tx+'px';
+						element.style.top = ty+'px';
+					},10);
+				}
+			}
+			
+			function start()
+			{
+				var o1 = new AnimatingElement(document.getElementById("o1"));
+				var o2 = new AnimatingElement(document.getElementById("o2"));
+				var o3 = new AnimatingElement(document.getElementById("o3"));
+				var o4 = new AnimatingElement(document.getElementById("o4"));
+				var o5 = new AnimatingElement(document.getElementById("o5"));
+				var o6 = new AnimatingElement(document.getElementById("o6"));
+				
+				o1.run(90);
+				o2.run(80);
+				o3.run(70);
+				o4.run(60);
+				o5.run(50);
+				o6.run(40);
+				
+			}
+		</script>
+	</head>
+	<body onload="start()">
+		<div id="o1"></div>
+		<div id="o2"></div>
+		<div id="o3"></div>
+		<div id="o4"></div>
+		<div id="o5"></div>
+		<div id="o6"></div>
+		<p>Wait, please</p>
+	</body>
+</html>
