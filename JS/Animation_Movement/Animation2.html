@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Animation 2</title>
+		<style>
+			div {
+				position: relative;
+				width : 100px;
+				height: 100px;
+				border : 1px solid black;
+			}
+			#red {
+				background-color: red;
+			}
+			#blue {
+				background-color: blue;
+			}
+			#yellow {
+				background-color: yellow;
+			}
+		</style>
+		<script>
+			function animatingElement(elem)
+			{
+				this.animate = function(a1, q1, a2, q2)
+				{
+				var x = elem.style.left;
+				var y = elem.style.top;
+				var v1 = 0, v2 = 0;
+				var times = 0;
+				var timer = setInterval(function()
+					{
+					if (times>40) clearInterval(timer);
+					else if (times < 20)
+					{
+						v1 = +v1 + +a1;
+						x = +x + +v1;
+						v2 = +v2 + +a2;
+						y = +y + +v2;
+						elem.style.left = x+'px';
+						elem.style.top = y+'px';
+					}
+					else if (times > 20)
+					{
+						v1 = +v1 + +q1;
+						x = +x + +v1;
+						v2 = +v2 + +q2;
+						y = +y + v2;
+						elem.style.left = x+'px';
+						elem.style.top = y+'px';
+					}
+					times++;
+					}, 100);
+				}
+			}
+			function start()
+			{
+				var aRed = new animatingElement(document.getElementById("red"));
+				var aYellow = new animatingElement(document.getElementById("yellow"));
+				var aBlue = new animatingElement(document.getElementById("blue"));
+				aRed.animate(1.5,-0.75,0.75,-0.5);
+				aYellow.animate(1,-0.5,0.25,-0.5);
+				aBlue.animate(2,-1.5,1.5,-0.5);
+			}
+			
+		</script>
+	</head>
+	<body onload="start()">
+		<div id="red">
+		</div>
+		<div id="blue">
+		</div>
+		<div id="yellow">
+		</div>
+		
+	</body>
+</html>
