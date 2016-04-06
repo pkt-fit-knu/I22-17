@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='utf-8'>
+		<title>Histogram</title>
+		<script>
+			function getHistogram(data){
+				hist = { bright : [256], red : [256], blue : [256], green : [256] };
+				for (var i = 0;i<256;i++){
+					hist.bright[i] = 0;
+					hist.red[i] = 0;
+					hist.blue[i] = 0;
+					hist.green[i] = 0;
+				}
+				for (var i = 0;i<data.length; i+=4){
+					r = data[i];
+					g = data[i+1];
+					b = data[i+2];
+					brightness = Math.floor((r + g + b) / 3);
+					hist.bright[brightness]++;
+					hist.red[r]++;
+					hist.blue[b]++;
+					hist.green[g]++;
+				}
+				return hist;
+			}
+			function drawHistogram(context, histarr){
+				max = {bright : 0, red : 0, blue : 0, green : 0};
+				for (var i = 0;i<256;i++){
+					if (histarr.bright[i] >= max.bright) max.bright = histarr.bright[i];
+					if (histarr.red[i] >= max.red) max.red = histarr.red[i];
+					if (histarr.green[i] >= max.green) max.green = histarr.green[i];
+					if (histarr.blue[i] >= max.blue) max.blue = histarr.blue[i];
+				}
+				context.strokeStyle = 'black';
+				context.moveTo(555, 0);
+				context.lineTo(300, 0);
+				context.lineTo(300, 300);
+				context.lineTo(555, 300);
+				context.lineTo(555, 0);
+				context.stroke();
+				input = prompt('enter channel 0-red, 1-green, 2-blue, 3-all');
+				if (input == 3){
+					context.strokeStyle = 'black';
+					for (var i = 0;i<256; i++){
+						percent = (histarr.bright[i] / max.bright);
+						x_diagramm = 300 + i;
+						y_diagramm = 300 * (1 - percent);
+						if (i == 0)
+							context.moveTo(x_diagramm, y_diagramm);
+						else
+							context.lineTo(x_diagramm, y_diagramm);
+					}
+					context.stroke();
+				}
+				if (input == 1){
+					context.strokeStyle = 'green';
+					for (var i = 0;i<256; i++){
+						percent = (histarr.green[i] / max.green);
+						x_diagramm = 300 + i;
+						y_diagramm = 300 * (1 - percent);
+						if (i == 0) {
+							context.moveTo(x_diagramm, y_diagramm);
+						}
+						else {
+							context.lineTo(x_diagramm, y_diagramm);
+						}
+					}
+					context.stroke();
+				}
+				if (input == 0){
+					context.strokeStyle = 'red';
+					for (var i = 0;i<256; i++){
+						percent = (histarr.red[i] / max.red);
+						x_diagramm = 300 + i;
+						y_diagramm = 300 * (1 - percent);
+						if (i == 0)
+							context.moveTo(x_diagramm, y_diagramm);
+						else
+							context.lineTo(x_diagramm, y_diagramm);
+					}
+					context.stroke();
+				}
+				if (input == 2){
+					context.strokeStyle = 'blue';
+					for (var i = 0;i<256; i++){
+						percent = (histarr.blue[i] / max.blue);
+						x_diagramm = 300 + i;
+						y_diagramm = 300 * (1 - percent);
+						if (i == 0)
+							context.moveTo(x_diagramm, y_diagramm);
+						else
+							context.lineTo(x_diagramm, y_diagramm);
+					}
+					context.stroke();
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<canvas id="Canvas2d"></canvas>
+		<script>
+			var can = document.getElementById('Canvas2d');
+			can.width = 600;
+			can.height = 300;
+			var ctx = can.getContext('2d');
+			var img = new Image();
+			img.onload = function(){
+				ctx.drawImage(img,0,0,300,300);
+			}
+			can.onclick = function(){
+				var imageData = ctx.getImageData(0,0,img.width,img.height).data;
+				hist_array = getHistogram(imageData);
+				console.log(hist_array);
+				drawHistogram(ctx, hist_array);
+			}
+			
+			img.src = 'img.jpg';
+		</script>
+	</body>
+</html>
