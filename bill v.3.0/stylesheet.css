@@ -1,0 +1,80 @@
+body{
+	background: gray;
+	margin : 0px;
+}
+#main {
+	position: relative;
+	width: 100%;
+	height: 100vh;
+	left:0px;
+	right:0px;
+	font-size:0px;
+	margin: 0px;
+	text-align: center;
+}
+#pool {
+	top: 10%;
+	position: relative;
+	display: inline-block;
+	margin: auto;
+	width: 675px;
+	height: 507px;
+}
+#table-pool {
+	position: absolute;
+	width: 100%;
+	height: 100%;	
+}
+#table-pool img{
+	width: 100%;
+	height: 100%;
+}
+#game {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+div.ball {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	border-radius: 100%;
+	border: 1px solid black;
+}
+#ball-1{
+	background-color: white;
+	left:540px;
+	top:240px;
+}
+#ball-2{
+	background-color: red;
+	left:300px;
+	top:240px;
+}
+#ball-3{
+	background-color: lightblue;
+	left:300px;
+	top:240px;
+}
+#ball-4{
+	background-color: green;
+	left:300px;
+	top:240px;
+}
+#ball-99{
+	background-color: gray;
+	left: -666px;
+	top: -666px;
+}
+#time-travel{
+	display: none;
+	position: absolute;
+	left:0px;
+	top:0px;
+	width:100%;
+	height:100%;
+}
+#time-travel img{
+	width:100%;
+	height:100%;
+}
